@@ -264,3 +264,30 @@
             width: 100%
         }
     }
+
+    section{
+        width: 320px;
+        text-align: right;
+    }
+    h1.name{
+ 
+        margin-bottom: 0px;
+    }
+    h2.title{
+
+        margin-top: 0px;
+        font-style: italic;
+    }
+
+    nav{
+        width: 320px;
+        text-align: right;
+    }
+
+    .story{
+        font-size:0.7rem !important;
+    }
+
+    .social-nav{
+        margin-right:0px !important;
+    }
