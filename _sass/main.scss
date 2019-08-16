@@ -1,0 +1,242 @@
+@charset "utf-8";
+
+// Customization
+
+// You can easily customize Bulma with your own variables.
+// Just uncomment the following block to see the result.
+
+/*
+// 1. Import the initial variables
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+// 2. Set your own initial variables
+// Update the blue shade, used for links
+$blue: #06bcef;
+// Add pink and its invert
+$pink: #ff8080;
+$pink-invert: #fff;
+// Update the sans-serif font family
+$family-sans-serif: "Helvetica", "Arial", sans-serif;
+
+// 3. Set the derived variables
+// Use the new pink as the primary color
+$primary: $pink;
+$primary-invert: $pink-invert;
+
+// 4. Import the rest of Bulma
+*/
+
+@import "../node_modules/bulma/bulma";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300i,400,600,900&display=swap');
+@import "fontawesome.scss";
+@import "brands.scss";
+
+$font-stack: Montserrat, sans-serif;
+
+
+body {
+    font: 100% $font-stack;
+  }
+
+a, a:hover,a:visited{
+    color:#4a4a4a
+}
+.skills {
+    font-weight: 600 !important;
+}
+
+.title {
+    font-weight: 900 !important;
+}
+footer{
+    background-color: whitesmoke;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    font-weight: 300;
+    font-style: italic;
+}
+#section-stories{
+    background-color: #f8f8f8;
+}
+
+.social {
+    color: #4a4a4a;
+    font-size: 1.40rem;
+    font-weight: 400;
+    line-height: 1.25;
+    opacity: 0.6;
+}
+.social:hover {opacity: 1}
+@mixin textGlitch($name, $intensity, $textColor, $background, $highlightColor1, $highlightColor2, $width, $height) {
+  
+    color: $textColor;
+    position: relative;
+    $steps: $intensity;
+    
+    // Ensure the @keyframes are generated at the root level
+    @at-root {
+      // We need two different ones
+      @for $i from 1 through 2 {
+        @keyframes #{$name}-anim-#{$i} {
+          @for $i from 0 through $steps {
+            #{percentage($i*(1/$steps))} {
+              clip: rect(
+                random($height)+px,
+                $width+px,
+                random($height)+px,
+                0
+              );
+            }
+          }
+        }
+      }
+    }
+    &:before,
+    &:after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: $background;
+      clip: rect(0, 0, 0, 0); 
+    }
+    &:after {
+      left: 2px;
+      text-shadow: -1px 0 $highlightColor1;
+      animation: #{$name}-anim-1 2s infinite linear alternate-reverse;
+    }
+    &:before {
+      left: -2px;
+      text-shadow: 2px 0 $highlightColor2; 
+      animation: #{$name}-anim-2 3s infinite linear alternate-reverse;
+    }
+    
+}
+.glitch {
+
+    @include textGlitch("glitch", 10, rgb(0, 0, 0), rgb(255, 255, 255), red, blue, 450, 115);
+  }
+
+.underline--magical {
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    &:hover {
+      background-size: 100% 88%;
+    }
+  }
+  
+
+  .s-twitter {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-twitter);
+    }
+  }
+
+  .s-medium {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-medium);
+    }
+  }
+
+  .s-github {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-github);
+    }
+  }
+
+  .s-facebook {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-facebook-f);
+    }
+  }
+
+  .s-instagram {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-instagram);
+    }
+  }
+
+  .s-linkedin {
+    @extend %fa-icon;
+    @extend .fab;
+  
+    &:before {
+      content: fa-content($fa-var-linkedin);
+    }
+  }
+
+
+  $dots: "......................................................................";
+
+.def-list-dots {
+
+    a {
+        line-height: 1.4em;
+        font-weight: 500;
+        opacity: 0.5
+      }
+      a:hover {opacity: 1}
+  // Each key/value pair is inside of its own dl for easier styling.
+  // We use CSS table layout rather than flexbox for wider support.
+  dl {
+    display: table;
+    width: 100%;
+    margin: 3px 0;
+  }
+
+  dt {
+    display: table-cell;
+    width: 100%;
+    max-width: 0; // Prevents Safari 5 table layout bug.
+    overflow: hidden;
+    vertical-align: top;
+    
+  
+
+    // Add some spacing between the dots and the term.
+    span:after {
+      content: " ";
+    }
+
+    &:after {
+      content: $dots + $dots + $dots;
+      display: inline-block;
+      width: 0;
+      color: rgba(0, 0, 0, .6);
+    }
+  }
+
+  // Items with no dd should have no dots
+  .no-def-item dt:after {
+    content: "";
+  }
+
+  dd {
+    display: table-cell;
+    margin: 0;
+    padding-left: 4px;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+}
+
+
